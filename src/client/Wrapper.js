@@ -19,8 +19,13 @@ import {
   getUseBeta,
   getNightmode,
 } from './reducers';
-import { login, logout, busyLogin, getUpdatedSCUserMetadata } from './auth/authActions';
-import { getFollowing, getNotifications } from './user/userActions';
+//import {
+//  login, logout, busyLogin, getUpdatedSCUserMetadata
+//} from './auth/authActions';
+import {
+  getFollowing,
+//  getNotifications
+} from './user/userActions';
 import {
   getRate,
   getRewardFund,
@@ -48,17 +53,17 @@ import BBackTop from './components/BBackTop';
     nightmode: getNightmode(state),
   }),
   {
-    login,
-    logout,
+    // login,
+    // logout,
     getFollowing,
-    getNotifications,
+//    getNotifications,
     getRate,
     getRewardFund,
     getTrendingTopics,
-    busyLogin,
+//    busyLogin,
     getRebloggedList: reblogActions.getRebloggedList,
     setUsedLocale,
-    getUpdatedSCUserMetadata,
+//    getUpdatedSCUserMetadata,
   },
 )
 export default class Wrapper extends React.PureComponent {
@@ -103,7 +108,7 @@ export default class Wrapper extends React.PureComponent {
   };
 
   static async fetchData({ store, req, res }) {
-    await store.dispatch(login());
+    //await store.dispatch(login());
 
     const appUrl = url.format({
       protocol: req.protocol,
@@ -139,12 +144,12 @@ export default class Wrapper extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.login().then(() => {
-      this.props.getFollowing();
-      this.props.getNotifications();
-      this.props.busyLogin();
-      this.props.getUpdatedSCUserMetadata();
-    });
+    // this.props.login().then(() => {
+    //   this.props.getFollowing();
+    //   this.props.getNotifications();
+    //   this.props.busyLogin();
+    //   this.props.getUpdatedSCUserMetadata();
+    // });
 
     this.props.getRewardFund();
     this.props.getRebloggedList();

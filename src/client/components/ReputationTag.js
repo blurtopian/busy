@@ -5,7 +5,7 @@ import { Tag } from 'antd';
 import BTooltip from './BTooltip';
 import formatter from '../helpers/steemitFormatter';
 
-function ReputationTag({ intl, reputation }) {
+function ReputationTag({ intl, reputation = 0 }) {
   const formattedReputation = formatter.reputationFloat(reputation);
 
   return (
@@ -22,7 +22,7 @@ function ReputationTag({ intl, reputation }) {
 
 ReputationTag.propTypes = {
   intl: PropTypes.shape().isRequired,
-  reputation: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  reputation: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default injectIntl(ReputationTag);

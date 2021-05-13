@@ -56,12 +56,7 @@ class PostRecommendation extends Component {
 
   getPostsByAuthor = author => {
     steemAPI
-      .sendAsync('get_discussions_by_blog', [
-        {
-          tag: author,
-          limit: 4,
-        },
-      ])
+      .getDiscussionsByBlogAsync(author, 4)
       .then(result => {
         const recommendedPosts = Array.isArray(result) ? result : [];
         this.setState({

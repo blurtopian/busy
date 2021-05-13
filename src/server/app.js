@@ -5,7 +5,12 @@ import Handlebars from 'handlebars';
 import paths from '../../scripts/paths';
 import createSsrHandler from './handlers/createSsrHandler';
 import createAmpHandler from './handlers/createAmpHandler';
-import steemAPI from './steemAPI';
+//import steemAPI from './steemAPI';
+
+import blurt from '@blurtfoundation/blurtjs';
+
+const url = process.env.STEEMJS_URL || 'https://rpc.blurt.world';
+blurt.api.setOptions({ url, useAppbaseApi: true });
 
 const indexPath = `${paths.templates}/index.hbs`;
 const indexHtml = fs.readFileSync(indexPath, 'utf-8');
@@ -49,7 +54,7 @@ app.get('/i/@:referral', async (req, res) => {
   try {
     const { referral } = req.params;
 
-    const accounts = await steemAPI.sendAsync('get_accounts', [[referral]]);
+    const accounts = await blurt.api.getAccountsAsync([referral]);
     if (accounts[0]) {
       res.cookie('referral', referral, { maxAge: 86400 * 30 * 1000 });
       res.redirect('/');
@@ -63,7 +68,7 @@ app.get('/i/:parent/@:referral/:permlink', async (req, res) => {
   try {
     const { parent, referral, permlink } = req.params;
 
-    const content = await steemAPI.sendAsync('get_content', [referral, permlink]);
+    const content = await blurt.api.getContentAsync(referral, permlink);
 
     if (content.author) {
       res.cookie('referral', referral, { maxAge: 86400 * 30 * 1000 });

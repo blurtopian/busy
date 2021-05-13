@@ -78,7 +78,7 @@ export const getUserComments = ({ username, limit = 20 }) => (dispatch, getState
   dispatch({
     type: GET_USER_COMMENTS.ACTION,
     payload: steemAPI
-      .sendAsync('get_discussions_by_comments', [{ start_author: username, limit }])
+      .getDiscussionsByCommentsAsync(username, limit)
       .then(postsData => postsData),
     meta: { sortBy: 'comments', category: username, limit },
   });
@@ -107,13 +107,7 @@ export const getMoreUserComments = ({ username, limit = 20 }) => (
   return dispatch({
     type: GET_MORE_USER_COMMENTS.ACTION,
     payload: steemAPI
-      .sendAsync('get_discussions_by_comments', [
-        {
-          start_author: startAuthor,
-          start_permlink: startPermlink,
-          limit: limit + 1,
-        },
-      ])
+      .getDiscussionsByCommentsAsync(startAuthor, startPermlink, limit + 1)
       .then(postsData => postsData.slice(1)),
     meta: { sortBy: 'comments', category: username, limit },
   });
@@ -126,7 +120,7 @@ export const getReplies = () => (dispatch, getState, { steemAPI }) => {
   dispatch({
     type: GET_REPLIES.ACTION,
     payload: steemAPI
-      .sendAsync('get_state', [`/@${category}/recent-replies`])
+      .getStateAsync(`/@${category}/recent-replies`)
       .then(apiRes => Object.values(apiRes.content).sort((a, b) => b.id - a.id)),
     meta: { sortBy: 'replies', category, limit: 50 },
   });
@@ -152,7 +146,7 @@ export const getMoreReplies = () => (dispatch, getState, { steemAPI }) => {
   return dispatch({
     type: GET_MORE_REPLIES.ACTION,
     payload: steemAPI
-      .sendAsync('get_replies_by_last_update', [startAuthor, startPermlink, limit + 1])
+      .getRepliesByLastUpdateAsync(startAuthor, startPermlink, limit + 1)
       .then(postsData => postsData.slice(1)),
     meta: { sortBy: 'replies', category, limit },
   });
@@ -170,10 +164,10 @@ async function getBookmarksData(bookmarks, steemAPI) {
   for (let idx = 0; idx < Object.keys(bookmarks).length; idx += 1) {
     const postId = Object.keys(bookmarks)[idx];
 
-    const postData = steemAPI.sendAsync('get_content', [
+    const postData = steemAPI.getContentAsync(
       bookmarks[postId].author,
       bookmarks[postId].permlink,
-    ]);
+    );
     bookmarksData.push(postData);
   }
   return Promise.all(bookmarksData.sort((a, b) => a.timestamp - b.timestamp).reverse());

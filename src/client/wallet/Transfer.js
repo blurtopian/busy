@@ -240,7 +240,7 @@ export default class Transfer extends React.Component {
       ]);
       return;
     }
-    steemAPI.sendAsync('get_accounts', [[value]]).then(result => {
+    steemAPI.getAccountsAsync([value]).then(result => {
       if (result[0]) {
         callback();
       } else {

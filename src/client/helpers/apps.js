@@ -1,8 +1,8 @@
-const appsList = require('steemscript/apps.json');
+//const appsList = require('steemscript/apps.json');
 
 const apps = {};
 
-Object.keys(appsList).forEach(key => {
+Object.keys([]).forEach(key => {
   apps[key] = appsList[key].name;
 });
 

@@ -314,7 +314,7 @@ class Story extends React.Component {
                 <Link to={`/@${post.author}`}>
                   <h4>
                     <span className="username">{post.author}</span>
-                    <ReputationTag reputation={post.author_reputation} />
+                    <ReputationTag reputation={0} />
                   </h4>
                 </Link>
                 <span className="Story__topics">

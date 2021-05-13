@@ -165,7 +165,7 @@ export function createPermlink(title, author, parent_author, parent_permlink) {
     }
 
     return steemAPI
-      .sendAsync('get_content', [author, s])
+      .getContentAsync(author, s)
       .then(content => {
         let prefix;
         if (content.body !== '') {

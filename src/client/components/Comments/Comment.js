@@ -273,7 +273,7 @@ class Comment extends React.Component {
         <div className="Comment__text">
           <Link to={`/@${comment.author}`}>
             <span className="username">{comment.author}</span>
-            <ReputationTag reputation={comment.author_reputation} />
+            <ReputationTag reputation={0} />
             {comment.author === rootPostAuthor && (
               <BTooltip
                 title={intl.formatMessage({

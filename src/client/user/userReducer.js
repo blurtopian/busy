@@ -112,32 +112,31 @@ export default function userReducer(state = initialState, action) {
         ...state,
         recommendations: filterRecommendations(state.following.list),
       };
+    // case actions.GET_NOTIFICATIONS.START:
+    //   return {
+    //     ...state,
+    //     loadingNotifications: true,
+    //   };
 
-    case actions.GET_NOTIFICATIONS.START:
-      return {
-        ...state,
-        loadingNotifications: true,
-      };
+    // case actions.GET_NOTIFICATIONS.SUCCESS:
+    //   return {
+    //     ...state,
+    //     notifications: action.payload,
+    //     loadingNotifications: false,
+    //   };
 
-    case actions.GET_NOTIFICATIONS.SUCCESS:
-      return {
-        ...state,
-        notifications: action.payload,
-        loadingNotifications: false,
-      };
+    // case actions.GET_NOTIFICATIONS.ERROR:
+    //   return {
+    //     ...state,
+    //     loadingNotifications: false,
+    //   };
 
-    case actions.GET_NOTIFICATIONS.ERROR:
-      return {
-        ...state,
-        loadingNotifications: false,
-      };
-
-    case appTypes.ADD_NEW_NOTIFICATION:
-      return {
-        ...state,
-        notifications: [action.payload, ...state.notifications],
-        latestNotification: action.payload,
-      };
+    // case appTypes.ADD_NEW_NOTIFICATION:
+    //   return {
+    //     ...state,
+    //     notifications: [action.payload, ...state.notifications],
+    //     latestNotification: action.payload,
+    //   };
     default: {
       return state;
     }
@@ -149,7 +148,7 @@ export const getPendingFollows = state => state.following.pendingFollows;
 export const getIsFetchingFollowingList = state => state.following.isFetching;
 export const getRecommendations = state => state.recommendations;
 export const getFollowingFetched = state => state.following.fetched;
-export const getNotifications = state => state.notifications;
+//export const getNotifications = state => state.notifications;
 export const getIsLoadingNotifications = state => state.loadingNotifications;
 export const getFetchFollowListError = state => state.fetchFollowListError;
 export const getLatestNotification = state => state.latestNotification;

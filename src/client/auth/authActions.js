@@ -59,14 +59,14 @@ export const reload = () => dispatch =>
     },
   });
 
-export const logout = () => (dispatch, getState, { steemConnectAPI }) => {
-  steemConnectAPI.revokeToken();
-  Cookie.remove('access_token');
+// export const logout = () => (dispatch, getState, { steemConnectAPI }) => {
+//   steemConnectAPI.revokeToken();
+//   Cookie.remove('access_token');
 
-  dispatch({
-    type: LOGOUT,
-  });
-};
+//   dispatch({
+//     type: LOGOUT,
+//   });
+// };
 
 export const getUpdatedSCUserMetadata = () => dispatch =>
   dispatch({
@@ -77,29 +77,29 @@ export const getUpdatedSCUserMetadata = () => dispatch =>
     },
   });
 
-export const busyLogin = () => (dispatch, getState, { busyAPI }) => {
-  const accessToken = Cookie.get('access_token');
-  const state = getState();
+// export const busyLogin = () => (dispatch, getState, { busyAPI }) => {
+//   const accessToken = Cookie.get('access_token');
+//   const state = getState();
 
-  if (!getIsAuthenticated(state)) {
-    return dispatch({ type: BUSY_LOGIN.ERROR });
-  }
+//   if (!getIsAuthenticated(state)) {
+//     return dispatch({ type: BUSY_LOGIN.ERROR });
+//   }
 
-  busyAPI.subscribe((response, message) => {
-    const type = message && message.type;
+//   busyAPI.subscribe((response, message) => {
+//     const type = message && message.type;
 
-    if (type === BUSY_API_TYPES.notification && message.notification) {
-      dispatch(addNewNotification(message.notification));
-    }
-  });
+//     if (type === BUSY_API_TYPES.notification && message.notification) {
+//       dispatch(addNewNotification(message.notification));
+//     }
+//   });
 
-  const targetUsername = getAuthenticatedUserName(state);
+//   const targetUsername = getAuthenticatedUserName(state);
 
-  return dispatch({
-    type: BUSY_LOGIN.ACTION,
-    meta: targetUsername,
-    payload: {
-      promise: busyAPI.sendAsync('login', [accessToken]),
-    },
-  });
-};
+//   return dispatch({
+//     type: BUSY_LOGIN.ACTION,
+//     meta: targetUsername,
+//     payload: {
+//       promise: busyAPI.sendAsync('login', [accessToken]),
+//     },
+//   });
+// };

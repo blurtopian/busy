@@ -369,7 +369,7 @@ class StoryFull extends React.Component {
           <div className="StoryFull__header__text">
             <Link to={`/@${post.author}`}>
               <span className="username">{post.author}</span>
-              <ReputationTag reputation={post.author_reputation} />
+              <ReputationTag reputation={0} />
             </Link>
             <BTooltip
               title={

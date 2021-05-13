@@ -61,7 +61,7 @@ const createFormatter = api => {
     if (!vesting_steem || !feed_price) {
       if (!gprops || !feed_price) {
         promises.push(
-          api.sendAsync('get_state', [`/@${username}`]).then(data => {
+          api.getStateAsync(`/@${username}`).then(data => {
             gprops = data.props;
             feed_price = data.feed_price;
             vesting_steem = vestingSteem(account, gprops);
@@ -74,7 +74,7 @@ const createFormatter = api => {
 
     if (!open_orders) {
       promises.push(
-        api.sendAsync('get_open_orders', [username]).then(open_orders => {
+        api.getOpenOrdersAsync(username).then(open_orders => {
           orders = processOrders(open_orders, assetPrecision);
         }),
       );
@@ -84,7 +84,7 @@ const createFormatter = api => {
 
     if (!savings_withdraws) {
       promises.push(
-        api.sendAsync('get_savings_withdraw_from', [username]).then(savings_withdraws => {
+        api.getSavingsWithdrawFromAsync(username).then(savings_withdraws => {
           savings = calculateSaving(savings_withdraws);
         }),
       );

@@ -28,7 +28,7 @@ export const getSingleComment = (author, permlink, focus = false) => (
 ) =>
   dispatch({
     type: GET_SINGLE_COMMENT.ACTION,
-    payload: steemAPI.sendAsync('get_content', [author, permlink]),
+    payload: steemAPI.getContentAsync(author, permlink),
     meta: { focus },
   });
 
@@ -66,7 +66,7 @@ export const getComments = postId => (dispatch, getState, { steemAPI }) => {
     type: GET_COMMENTS,
     payload: {
       promise: steemAPI
-        .sendAsync('get_state', [`/${category}/@${author}/${permlink}`])
+        .getStateAsync(`/${category}/@${author}/${permlink}`)
         .then(apiRes => ({
           rootCommentsList: getRootCommentsList(apiRes),
           commentsChildrenList: getCommentsChildrenLists(apiRes),

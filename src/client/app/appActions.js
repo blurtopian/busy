@@ -33,7 +33,7 @@ export const getRate = () => (dispatch, getState, { steemAPI }) => {
     type: RATE_REQUEST.ACTION,
     payload: {
       promise: steemAPI
-        .sendAsync('get_current_median_history_price', [])
+        .getCurrentMedianHistoryPriceAsync()
         .then(resp => parseFloat(resp.base) / parseFloat(resp.quote)),
     },
   });
@@ -42,14 +42,14 @@ export const getRate = () => (dispatch, getState, { steemAPI }) => {
 export const getRewardFund = () => (dispatch, getSelection, { steemAPI }) =>
   dispatch({
     type: GET_REWARD_FUND,
-    payload: { promise: steemAPI.sendAsync('get_reward_fund', ['post']) },
+    payload: { promise: steemAPI.getRewardFundAsync('post') },
   });
 
 export const getTrendingTopics = () => (dispatch, getState, { steemAPI }) => {
   dispatch({
     type: GET_TRENDING_TOPICS,
     payload: {
-      promise: steemAPI.sendAsync('get_trending_tags', [undefined, 50]).then(result =>
+      promise: steemAPI.getTrendingTagsAsync(undefined, 50).then(result =>
         Object.values(result)
           .map(tag => tag.name)
           .filter(tag => tag !== ''),

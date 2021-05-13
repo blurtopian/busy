@@ -10,7 +10,7 @@ import { searchAutoComplete } from '../../search/searchActions';
 import { getUpdatedSCUserMetadata } from '../../auth/authActions';
 import {
   getAutoCompleteSearchResults,
-  getNotifications,
+//  getNotifications,
   getAuthenticatedUserSCMetaData,
   getIsLoadingNotifications,
 } from '../../reducers';
@@ -30,7 +30,7 @@ import { USER_METADATA_KEY } from '../../helpers/constants';
 @connect(
   state => ({
     autoCompleteSearchResults: getAutoCompleteSearchResults(state),
-    notifications: getNotifications(state),
+//    notifications: getNotifications(state),
     userSCMetaData: getAuthenticatedUserSCMetaData(state),
     loadingNotifications: getIsLoadingNotifications(state),
   }),

@@ -7,10 +7,10 @@ import LeftSidebar from '../app/Sidebar/LeftSidebar';
 import Affix from '../components/Utils/Affix';
 import * as notificationConstants from '../../common/constants/notifications';
 import { getUpdatedSCUserMetadata } from '../auth/authActions';
-import { getNotifications } from '../user/userActions';
+//import { getNotifications } from '../user/userActions';
 import {
   getAuthenticatedUserSCMetaData,
-  getNotifications as getNotificationsState,
+//  getNotifications as getNotificationsState,
   getIsLoadingNotifications,
   getAuthenticatedUserName,
 } from '../reducers';
@@ -147,13 +147,13 @@ class Notifications extends React.Component {
 
 export default connect(
   state => ({
-    notifications: getNotificationsState(state),
+    //notifications: getNotificationsState(state),
     userSCMetaData: getAuthenticatedUserSCMetaData(state),
     currentAuthUsername: getAuthenticatedUserName(state),
     loadingNotifications: getIsLoadingNotifications(state),
   }),
   {
     getUpdatedSCUserMetadata,
-    getNotifications,
+    //getNotifications,
   },
 )(requiresLogin(Notifications));

@@ -34,7 +34,7 @@ const DEFINE_PLUGIN = new webpack.DefinePlugin({
   'process.env.STEEMCONNECT_HOST': JSON.stringify(
     process.env.STEEMCONNECT_HOST || 'https://steemconnect.com',
   ),
-  'process.env.STEEMJS_URL': JSON.stringify(process.env.STEEMJS_URL || 'https://api.steemit.com'),
+  'process.env.STEEMJS_URL': JSON.stringify(process.env.STEEMJS_URL || 'https://rpc.blurt.world'),
   'process.env.SIGNUP_URL': JSON.stringify(
     process.env.SIGNUP_URL || 'https://signup.steemit.com/?ref=busy',
   ),
